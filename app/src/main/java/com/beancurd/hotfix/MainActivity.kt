@@ -9,13 +9,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         findViewById<TextView>(R.id.tv_onclick).setOnClickListener {
             showToast();
         }
     }
 
     private fun showToast() {
-        Toast.makeText(this,"hello world",0).show()
+        Toast.makeText(this,"version",0).show()
     }
 }
