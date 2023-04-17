@@ -16,7 +16,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showToast() {
-        val i = 5/0
         Toast.makeText(this,"hello world",0).show()
     }
 }
