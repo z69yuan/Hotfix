@@ -1,6 +1,7 @@
 package com.beancurd.crypt
 
 import android.util.Log
+import com.beancurd.common.utils.printCurrentLoader
 
 class NativeLib {
 
@@ -15,6 +16,7 @@ class NativeLib {
     companion object {
         // Used to load the 'crypt' library on application startup.
         init {
+            printCurrentLoader()
             Log.e("zfc","jni .....")
             // void load(String absolutePath, ClassLoader loader)
             System.loadLibrary("crypt")

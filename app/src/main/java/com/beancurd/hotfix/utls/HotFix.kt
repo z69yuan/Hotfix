@@ -3,6 +3,7 @@ package com.beancurd.hotfix.utls
 import android.content.Context
 import android.util.Log
 import com.beancurd.common.utils.LogE
+import com.beancurd.common.utils.printCurrentLoader
 import com.beancurd.hotfix.getDexElement
 import com.beancurd.hotfix.getNativeElement
 import com.beancurd.hotfix.setDexElement
@@ -62,24 +63,24 @@ fun installNewSo(context: Context,appClassLoader: ClassLoader) {
         LogE(TAG, "$file does not exist ....")
         return
     }
-    // 1. 加载插件包
-    val loader = BaseDexClassLoader(file.absolutePath,null,context.cacheDir.absolutePath,null)
-    val newElements = getNativeElement(loader)
-    LogE(TAG,"newElements is : $newElements")
-    var result = loader.findLibrary("crypt")
-    LogE(TAG,"result : $result")
+//    // 1. 加载插件包
+//    val loader = BaseDexClassLoader(file.absolutePath,null,context.cacheDir.absolutePath,null)
+//    val newElements = getNativeElement(loader)
+//    LogE(TAG,"newElements is : $newElements")
+//    var result = loader.findLibrary("crypt")
+//    LogE(TAG,"result : $result")
 
     var oldElements = getNativeElement(appClassLoader as BaseDexClassLoader)
     (oldElements as ArrayList<File>).apply {
         clear()
-        add(File(context.cacheDir.absolutePath))
+//        add(File(context.cacheDir.absolutePath))
     }
     val oldElementsV2 = getNativeElement(appClassLoader as BaseDexClassLoader)
     Log.e("zfc","native equals ${oldElements === oldElementsV2}")
 
-    result = loader.findLibrary("crypt")
-
-    LogE(TAG,"resultV2 : $result")
+//    result = loader.findLibrary("crypt")
+//
+//    LogE(TAG,"resultV2 : $result")
 
     /**
      *
@@ -92,11 +93,7 @@ fun installNewSo(context: Context,appClassLoader: ClassLoader) {
 
     public static native ClassLoader getCallingClassLoader();
      */
-    Class.forName("dalvik.system.VMStack").declaredMethods.forEach {
-        if(it.name.equals("getCallingClassLoader")) {
-            val callLoader = it.invoke(null)
-            LogE(TAG, "callLoader is $callLoader")
-        }
-    }
+
+    printCurrentLoader()
 
 }
