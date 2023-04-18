@@ -2,7 +2,7 @@ package com.beancurd.hotfix
 
 import android.app.Application
 import android.content.Context
-import com.beancurd.hotfix.utls.installNewDex
+import com.beancurd.hotfix.utls.installNewSo
 
 class MyApp : Application() {
 
@@ -12,7 +12,10 @@ class MyApp : Application() {
         super.attachBaseContext(base)
         base?:return
 
-        installNewDex(base, classLoader)
+        // installNewDex(base, classLoader)
+
+        // 修复动态库
+        installNewSo(base, classLoader)
     }
 
 }

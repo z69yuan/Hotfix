@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 rootProject.name = "Hotfix"
 include ':app'
 include ':common'
+include ':crypt'
